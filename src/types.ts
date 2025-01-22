@@ -64,3 +64,31 @@ export interface ReviewVote {
   type: 'helpful' | 'disagree';
   createdAt: Date;
 }
+
+export type gradeDist =
+  {
+    courseId: string;
+    courseName: string;
+    semester: string;
+    distribution: {
+      A: number;
+      B: number;
+      C: number;
+      D:number;
+      F:number;
+      W: number;
+    },
+    averageGPA: number;
+  }
+
+export type Professor = {
+    id: string;
+    firstName: string;
+    lastName: string;
+    department: string;
+    school: string;
+    averageRating: number;
+    numEvals: number;
+    coursesTaught: Array<string>;
+    popularityScore: number;
+  }

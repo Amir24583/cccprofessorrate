@@ -2,7 +2,8 @@ import React from 'react';
 import { Search, TrendingUp, Filter, School } from 'lucide-react';
 import { PopularProfessors } from '../components/PopularProfessors';
 import { SearchBar } from '../components/SearchBar';
-import { mockProfessors } from '../data/mockData';
+//import { data } from '../data/data';
+import { supabase, data } from '../utils/supabase';
 
 interface MainPageProps {
   onDepartmentSelect: (department: string) => void;
@@ -53,7 +54,7 @@ export function MainPage({ onDepartmentSelect }: MainPageProps) {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">
             Top-Rated Professors
           </h2>
-          <PopularProfessors professors={mockProfessors} />
+          <PopularProfessors professors={data} />
         </div>
       </section>
 
@@ -104,3 +105,5 @@ const departments = [
   'Business',
   'Psychology'
 ];
+
+

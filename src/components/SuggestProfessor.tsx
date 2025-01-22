@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
+import { supabase } from '../utils/supabase';
 
 interface SuggestProfessorProps {
   onClose: () => void;
   onSubmit: (suggestion: {
-    name: string;
+    firstName: string;
+    lastName: string;
     department: string;
     email: string;
     courses: string[];
@@ -12,18 +14,43 @@ interface SuggestProfessorProps {
   }) => void;
 }
 
+interface Sugprofsupabase {
+  
+}
+
 export function SuggestProfessor({ onClose, onSubmit }: SuggestProfessorProps) {
   const [suggestion, setSuggestion] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     department: '',
     email: '',
     courses: [''],
     reason: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  async function handleSubmit (e: React.FormEvent){
     e.preventDefault();
     onSubmit(suggestion);
+    console.log("handleSubmit")
+
+while (suggestion.courses.length < 3){
+  suggestion.courses.push("NULL");
+}
+
+  var sugprof = {
+    id: 1, firstName: suggestion.firstName, lastName: suggestion.lastName, 
+        department: suggestion.department, Email: suggestion.email, "courses/1": suggestion.courses[0], "courses/2": suggestion.courses[1],
+        "courses/3": suggestion.courses[2],
+  }
+
+
+
+
+  const { error } = await supabase
+  .from('SuggestedProfessors')
+  .insert(sugprof)
+  if (error != null){console.log(error)}
+    return;
   };
 
   return (
@@ -41,16 +68,29 @@ export function SuggestProfessor({ onClose, onSubmit }: SuggestProfessorProps) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Professor Name
+              Professor First Name
             </label>
             <input
               type="text"
-              value={suggestion.name}
-              onChange={(e) => setSuggestion({ ...suggestion, name: e.target.value })}
+              value={suggestion.firstName}
+              onChange={(e) => setSuggestion({ ...suggestion, firstName: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               required
             />
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Professor Last Name
+            </label>
+            <input
+              type="text"
+              value={suggestion.lastName}
+              onChange={(e) => setSuggestion({ ...suggestion, lastName: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              required
+            />
+          </div>
+
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">

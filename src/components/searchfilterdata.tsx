@@ -1,20 +1,25 @@
 import React from 'react';
+import { supabase, data } from '../utils/supabase';
 import { Professor } from '../types';
 import { ProfessorCard } from './ProfessorCard';
+import fuzzysearch from 'fuzzysearch-ts';
 
-interface PopularProfessorsProps {
+
+
+
+
+interface SearchProfProps {
   professors: Professor[];
   department?: string;
   course?: string;
+  searchterm: string;
 }
 
-export function PopularProfessors({ professors, department, course }: PopularProfessorsProps) {
-  // Filter and sort professors by popularity score
+export function PopularProfessors({ professors, searchterm }: SearchProfProps) {
+  // Filter and sort professors by most relevant
   const filteredProfessors = professors
-    .filter(prof => 
-      (!department || prof.department === department) &&
-      (!course || prof.coursesTaught.includes(course))
-    )
+    .filter(prof => fuzzysearch(prof.firstName, searchterm) || fuzzysearch(prof.lastName, searchterm))
+
     .sort((a, b) => (b.popularityScore || 0) - (a.popularityScore || 0))
     .slice(0, 10); // Show top 10
 

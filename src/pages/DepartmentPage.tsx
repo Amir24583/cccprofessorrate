@@ -2,9 +2,10 @@ import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Professor } from '../types';
 import { ProfessorCard } from '../components/ProfessorCard';
-import { mockProfessors } from '../data/mockData';
+//import { data } from '../data/data';
 import { DepartmentStats } from '../components/DepartmentStats';
 import { SearchBar } from '../components/SearchBar';
+import { supabase, data } from '../utils/supabase';
 
 interface DepartmentPageProps {
   department: string;
@@ -12,8 +13,8 @@ interface DepartmentPageProps {
 }
 
 export function DepartmentPage({ department, onBack }: DepartmentPageProps) {
-  const departmentProfessors = mockProfessors.filter(
-    prof => prof.department === department
+  const departmentProfessors = data.filter(
+    prof => prof.department === dept2abv(department)
   );
 
   return (
@@ -65,4 +66,23 @@ export function DepartmentPage({ department, onBack }: DepartmentPageProps) {
       </div>
     </div>
   );
+}
+
+function dept2abv(input: string){
+  if (input == "Computer Science")
+    return "CSC"
+  if (input =="Mathematics")
+    return "MATH"
+  if (input =="Physics")
+    return "PHYS"
+  if (input =="Chemistry")
+    return "CHEM"
+  if (input =='Biology')
+    return "BIO"
+  if (input =='Engineering')
+    return "ENGR"
+  if (input =='Business')
+    return "BUS"
+  if (input =='Psychology')
+    return "PSY"
 }
