@@ -38,9 +38,13 @@ while (suggestion.courses.length < 3){
 }
 
   var sugprof = {
-    id: 1, firstName: suggestion.firstName, lastName: suggestion.lastName, 
-        department: suggestion.department, Email: suggestion.email, "courses/1": suggestion.courses[0], "courses/2": suggestion.courses[1],
-        "courses/3": suggestion.courses[2],
+    firstName: suggestion.firstName, 
+    lastName: suggestion.lastName, 
+    department: suggestion.department, 
+    Email: suggestion.email, 
+    "courses/1": suggestion.courses[0], 
+    "courses/2": suggestion.courses[1],
+    "courses/3": suggestion.courses[2],
   }
 
 

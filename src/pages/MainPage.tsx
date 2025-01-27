@@ -10,6 +10,9 @@ interface MainPageProps {
 }
 
 export function MainPage({ onDepartmentSelect }: MainPageProps) {
+  const handleSearch = (query: string) => {
+    console.log('Looking for:', query);
+  }
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Hero Section */}
@@ -21,7 +24,7 @@ export function MainPage({ onDepartmentSelect }: MainPageProps) {
           <p className="text-xl text-gray-600 mb-8">
             Make informed decisions with real student reviews and grade distributions
           </p>
-          <SearchBar onSearch={() => {}} />
+          <SearchBar onSearch={handleSearch} professors={{data: data}} />
         </div>
       </section>
 

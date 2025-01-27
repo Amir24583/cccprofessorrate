@@ -11,7 +11,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
       .from('professorlist') // Replace with your table name
       .select('*'); // Replace with specific columns if needed, e.g., 'id, name'
   
-    var data2: Array<Professor> = [];
+    var data2: Professor[]= [];
     if (error) {
       console.error('Error fetching data:', error);
     } else  if (data != null){

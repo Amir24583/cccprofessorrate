@@ -13,9 +13,26 @@ interface DepartmentPageProps {
 }
 
 export function DepartmentPage({ department, onBack }: DepartmentPageProps) {
+
   const departmentProfessors = data.filter(
     prof => prof.department === dept2abv(department)
   );
+
+  const [filteredProfessors, setFilteredProfessors] = React.useState(departmentProfessors);
+
+  const handleSearch = (query: string) => {
+    if (!query) {
+      setFilteredProfessors(departmentProfessors);
+      return;
+    }
+
+    const filtered = departmentProfessors.filter(prof => 
+      prof.firstName.toLowerCase().includes(query.toLowerCase()) ||
+      prof.lastName.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredProfessors(filtered);
+  };
+
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -36,7 +53,7 @@ export function DepartmentPage({ department, onBack }: DepartmentPageProps) {
         </div>
 
         <div className="mb-8">
-          <SearchBar onSearch={() => {}} />
+          <SearchBar onSearch={ handleSearch } professors={{data: departmentProfessors}} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -46,7 +63,7 @@ export function DepartmentPage({ department, onBack }: DepartmentPageProps) {
 
           <div className="lg:col-span-3">
             <div className="grid gap-6 md:grid-cols-2">
-              {departmentProfessors.map((professor) => (
+              {filteredProfessors.map((professor) => (
                 <ProfessorCard
                   key={professor.id}
                   professor={professor}
