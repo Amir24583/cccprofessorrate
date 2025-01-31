@@ -1,7 +1,6 @@
-import React from 'react';
 import { Professor } from '../types';
 import { ProfessorCard } from './ProfessorCard';
-import fuzzysearch from 'fuzzysearch';
+//import fuzzysearch from 'fuzzysearch';
 
 
 
@@ -15,10 +14,19 @@ interface SearchProfProps {
 }
 
 export function SearchedProfessors({ data, searchterm }: SearchProfProps) {
+  const searchTermLower = searchterm.toLowerCase();  
+  
   // Filter and sort professors by most relevant
   const filteredProfessors = data
-    .filter(prof => fuzzysearch(prof.firstName, searchterm) || fuzzysearch(prof.lastName, searchterm))
-
+    .filter(prof => 
+      //fuzzysearch(prof.firstName, searchterm) || fuzzysearch(prof.lastName, searchterm))
+      prof.firstName.toLowerCase().includes(searchTermLower) || 
+      prof.lastName.toLowerCase().includes(searchTermLower) ||
+      prof.department?.toLowerCase().includes(searchTermLower) ||
+      prof.coursesTaught?.some(course => 
+        course.toLowerCase().includes(searchTermLower)
+      )
+    )
     .sort((a, b) => (b.popularityScore || 0) - (a.popularityScore || 0))
     .slice(0, 10); // Show top 10
 

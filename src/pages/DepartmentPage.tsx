@@ -16,7 +16,7 @@ export function DepartmentPage({ department, onBack }: DepartmentPageProps) {
 
   const departmentProfessors = data.filter(
     prof => prof.department === dept2abv(department)
-  );
+  ).sort((a, b) => (b.popularityScore! - a.popularityScore!));
 
   const [filteredProfessors, setFilteredProfessors] = React.useState(departmentProfessors);
 

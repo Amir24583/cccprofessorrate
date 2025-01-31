@@ -1,7 +1,7 @@
 import React from 'react';
 import { Star, ThumbsUp, BookOpen, Trophy } from 'lucide-react';
 import { Professor } from '../types';
-
+import { ProfessorModal } from './ProfessorModal';
 interface ProfessorCardProps {
   professor: Professor;
   onClick: (professor: Professor) => void;
@@ -11,9 +11,14 @@ interface ProfessorCardProps {
 console.log(onclick)
 
 export function ProfessorCard({ professor, onClick, showPopularityBadge }: ProfessorCardProps) {
+  const [selectedProfessor, setSelectedProfessor] = React.useState<Professor | null>(null);
   return (
     <div 
-      onClick={() => onClick(professor)}
+      onClick={() => {
+        onClick(professor)
+        setSelectedProfessor(professor)
+        console.log(professor)
+      }}
       className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer relative"
     >
       {showPopularityBadge && professor.popularityScore && professor.popularityScore > 0.8 && (
@@ -56,6 +61,14 @@ export function ProfessorCard({ professor, onClick, showPopularityBadge }: Profe
           <span className="text-sm">Course info</span>
         </div>
       </div>
+      {selectedProfessor && (
+        <ProfessorModal
+          professor={selectedProfessor}
+          // Set timeout to allow the click tht opens modal to finish before triggering the close of modal
+          onClose={() => {setTimeout(() => {setSelectedProfessor(null)}, 0)
+        console.log("closing", selectedProfessor)}}
+        />
+      )}
     </div>
   );
 }

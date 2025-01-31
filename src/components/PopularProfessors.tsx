@@ -1,6 +1,7 @@
 import React from 'react';
 import { Professor } from '../types';
 import { ProfessorCard } from './ProfessorCard';
+import { ProfessorModal } from './ProfessorModal';
 
 interface PopularProfessorsProps {
   professors: Professor[];
@@ -13,7 +14,7 @@ export function PopularProfessors({ professors, department, course }: PopularPro
   const filteredProfessors = professors
     .filter(prof => 
       (!department || prof.department === department) &&
-      (!course || prof.coursesTaught.includes(course))
+      (!course || prof.coursesTaught.includes(course)) 
     )
     .sort((a, b) => (b.popularityScore || 0) - (a.popularityScore || 0))
     .slice(0, 10); // Show top 10
@@ -32,16 +33,23 @@ export function PopularProfessors({ professors, department, course }: PopularPro
       <div className="grid gap-6 md:grid-cols-2">
         {filteredProfessors.map((professor) => (
           <ProfessorCard
-              onClick={function(){
-                console.log(professor)
-              }
-            }
+              onClick={() => {{}}}
+                /*setSelectedProfessor(professor)
+                console.log(professor);
+              }}*/
             key={professor.id}
             professor={professor}
             showPopularityBadge
           />
         ))}
       </div>
+
+      {/*{selectedProfessor && (
+        <ProfessorModal
+          professor={selectedProfessor}
+          onClose={() => setSelectedProfessor(null)}
+        />
+      )}*/}
     </div>
   );
 }
