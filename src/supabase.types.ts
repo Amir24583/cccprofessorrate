@@ -219,6 +219,66 @@ export type Database = {
         }
         Relationships: []
       }
+      smcprofessorlist: {
+        Row: {
+          A: number | null
+          B: number | null
+          C: number | null
+          "Class Section": number | null
+          Course: string | null
+          D: number | null
+          Department: string | null
+          EW: number | null
+          F: number | null
+          ID: number
+          IX: number | null
+          NP: number | null
+          P: number | null
+          Professor: string | null
+          RD: number | null
+          Total: number | null
+          W: number | null
+        }
+        Insert: {
+          A?: number | null
+          B?: number | null
+          C?: number | null
+          "Class Section"?: number | null
+          Course?: string | null
+          D?: number | null
+          Department?: string | null
+          EW?: number | null
+          F?: number | null
+          ID: number
+          IX?: number | null
+          NP?: string | null
+          P?: string | null
+          Professor?: string | null
+          RD?: string | null
+          Total?: number | null
+          W?: string | null
+        }
+        Update: {
+          A?: number | null
+          B?: number | null
+          C?: number | null
+          "Class Section"?: number | null
+          Course?: string | null
+          D?: number | null
+          Department?: string | null
+          EW?: number | null
+          F?: number | null
+          ID?: number
+          IX?: number | null
+          NP?: string | null
+          P?: string | null
+          Professor?: string | null
+          RD?: string | null
+          Total?: number | null
+          W?: string | null
+        }
+        Relationships: []
+      }
       SuggestedProfessors: {
         Row: {
           "courses/1": string | null

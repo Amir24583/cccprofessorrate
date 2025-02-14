@@ -92,3 +92,22 @@ export type Professor = {
     coursesTaught: Array<string>;
     popularityScore: number;
   }
+
+export type SMCProfessor = {
+    Professor: string | null;
+    Department: string | null;
+    Course: string | null;
+    ClassSection: number | null;
+    A: number | null;
+    B: number | null;
+    C: number | null;
+    D: number | null;
+    EW: number| null;
+    F: number | null; 
+    IX: number | null;
+    NP: number | null; 
+    P: number | null;
+    RD: number | null;
+    W: number | null;
+    Total: number | null;
+}
