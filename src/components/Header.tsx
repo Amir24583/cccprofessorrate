@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import{ useState } from 'react';
 import { GraduationCap, PlusCircle } from 'lucide-react';
 import { SuggestProfessor } from './SuggestProfessor';
 
@@ -16,7 +16,7 @@ export function Header() {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <GraduationCap className="w-8 h-8 text-blue-600" />
-            <h1 className="ml-2 text-2xl font-bold text-gray-900">ProfessorRate</h1>
+            <h1 className="ml-2 text-2xl font-bold text-gray-900">SoCal ProfessorRate</h1>
           </div>
           <button
             onClick={() => setShowSuggestModal(true)}

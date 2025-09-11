@@ -91,6 +91,7 @@ export type Professor = {
     numEvals: number;
     coursesTaught: Array<string>;
     popularityScore: number;
+    imageUrl?: string;
   }
 
 export type SMCProfessor = {

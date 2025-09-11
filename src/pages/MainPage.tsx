@@ -3,13 +3,15 @@ import { Search, TrendingUp, Filter, School } from 'lucide-react';
 import { PopularProfessors } from '../components/PopularProfessors';
 import { SearchBar } from '../components/SearchBar';
 //import { data } from '../data/data';
-import { supabase, data } from '../utils/supabase';
+import { supabase, data, smcData } from '../utils/supabase';
 
 interface MainPageProps {
   onDepartmentSelect: (department: string) => void;
 }
 
 export function MainPage({ onDepartmentSelect }: MainPageProps) {
+  const combinedData = [...data, ...smcData];
+
   const handleSearch = (query: string) => {
     console.log('Looking for:', query);
   }
@@ -24,7 +26,7 @@ export function MainPage({ onDepartmentSelect }: MainPageProps) {
           <p className="text-xl text-gray-600 mb-8">
             Make informed decisions with real student reviews and grade distributions
           </p>
-          <SearchBar onSearch={handleSearch} professors={{data: data}} />
+          <SearchBar onSearch={handleSearch} professors={{data: combinedData}} />
         </div>
       </section>
 

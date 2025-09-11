@@ -5,7 +5,7 @@ import { ProfessorCard } from '../components/ProfessorCard';
 //import { data } from '../data/data';
 import { DepartmentStats } from '../components/DepartmentStats';
 import { SearchBar } from '../components/SearchBar';
-import { supabase, data } from '../utils/supabase';
+import { supabase, data, smcData } from '../utils/supabase';
 
 interface DepartmentPageProps {
   department: string;
