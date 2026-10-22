@@ -1,11 +1,11 @@
 import React from 'react';
-import { Professor, SMCProfessor } from '../types';
+import { Professor } from '../types';
 import { ProfessorCard } from './ProfessorCard';
 //import fuzzysearch from 'fuzzysearch';
 
 
 interface SearchProfProps {
-  data: (Professor | SMCProfessor)[];
+  data: Professor[];
   department?: string;
   course?: string;
   searchterm: string;
@@ -18,22 +18,13 @@ export function SearchedProfessors({ data, searchterm }: SearchProfProps) {
   const filteredProfessors = React.useMemo(() => {
     console.log(searchTermLower)
     if (!searchTermLower) return data;
-    return data.filter(prof => {
-    if ('firstName' in prof) {
-      return (
-        prof.firstName.toLowerCase().includes(searchTermLower) ||
-        prof.lastName.toLowerCase().includes(searchTermLower) ||
-        prof.department?.toLowerCase().includes(searchTermLower) ||
-        prof.coursesTaught?.some(course => course.toLowerCase().includes(searchTermLower))
-      );
-    } else {
-      return (
-        prof.Professor?.toLowerCase().includes(searchTermLower) ||
-        prof.Department?.toLowerCase().includes(searchTermLower) ||
-        prof.Course?.toLowerCase().includes(searchTermLower)
-      );
-    }
-  }).slice(0, 100);
+    return data.filter(prof =>
+      prof.firstName.toLowerCase().includes(searchTermLower) ||
+      prof.lastName.toLowerCase().includes(searchTermLower) ||
+      `${prof.firstName} ${prof.lastName}`.toLowerCase().includes(searchTermLower) ||
+      prof.department.toLowerCase().includes(searchTermLower) ||
+      prof.coursesTaught.some(course => course.toLowerCase().includes(searchTermLower))
+    ).slice(0, 100);
 }, [data, searchTermLower]);
 
   return (
@@ -44,9 +35,9 @@ export function SearchedProfessors({ data, searchterm }: SearchProfProps) {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {filteredProfessors.map((professor, index) => (
+        {filteredProfessors.map((professor) => (
           <ProfessorCard
-            key={'id' in professor ? professor.id : `smc-${index}`}
+            key={professor.id}
             professor={professor}
             onClick={() => console.log(professor)}
             showPopularityBadge

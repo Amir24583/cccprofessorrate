@@ -1,11 +1,11 @@
 import React from 'react';
 import { Search } from 'lucide-react';
 import { SearchedProfessors } from './searchfilterdata.tsx'
-import { Professor, SMCProfessor } from '../types';
+import { Professor } from '../types';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
-  professors: {data: (Professor | SMCProfessor)[]};
+  professors: {data: Professor[]};
 }
 
 export function SearchBar({ onSearch, professors }: SearchBarProps) {
