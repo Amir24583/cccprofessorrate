@@ -3,7 +3,7 @@ import { Search, TrendingUp, Filter, School } from 'lucide-react';
 import { PopularProfessors } from '../components/PopularProfessors';
 import { SearchBar } from '../components/SearchBar';
 //import { data } from '../data/data';
-import { supabase, data, smcData } from '../utils/supabase';
+import { data, smcData } from '../utils/supabase';
 
 interface MainPageProps {
   onDepartmentSelect: (department: string) => void;
@@ -59,7 +59,7 @@ export function MainPage({ onDepartmentSelect }: MainPageProps) {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">
             Top-Rated Professors
           </h2>
-          <PopularProfessors professors={data} />
+          <PopularProfessors professors={combinedData} />
         </div>
       </section>
 

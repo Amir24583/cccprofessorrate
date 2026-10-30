@@ -5,7 +5,7 @@ import { ProfessorCard } from '../components/ProfessorCard';
 //import { data } from '../data/data';
 import { DepartmentStats } from '../components/DepartmentStats';
 import { SearchBar } from '../components/SearchBar';
-import { supabase, data, smcData } from '../utils/supabase';
+import { data, smcData } from '../utils/supabase';
 
 interface DepartmentPageProps {
   department: string;
@@ -14,7 +14,7 @@ interface DepartmentPageProps {
 
 export function DepartmentPage({ department, onBack }: DepartmentPageProps) {
 
-  const departmentProfessors = data.filter(
+  const departmentProfessors = [...data, ...smcData].filter(
     prof => prof.department === dept2abv(department)
   ).sort((a, b) => (b.popularityScore! - a.popularityScore!));
 

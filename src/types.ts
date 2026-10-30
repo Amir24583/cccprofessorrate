@@ -92,6 +92,8 @@ export type Professor = {
     coursesTaught: Array<string>;
     popularityScore: number;
     imageUrl?: string;
+    tags?: Record<string, number>;
+    gradeDistributions?: gradeDist[];
   }
 
 export type SMCProfessor = {
